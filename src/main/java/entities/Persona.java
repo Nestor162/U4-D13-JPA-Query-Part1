@@ -1,10 +1,13 @@
 package entities;
 
 import java.time.LocalDate;
+import java.util.Set;
 import java.util.UUID;
 
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -16,27 +19,28 @@ import lombok.Setter;
 @Entity
 public class Persona {
 	@Id
+	@GeneratedValue
 	private UUID id;
 	private String nome;
 	private String cognome;
 	private String email;
 	private LocalDate dataNascita;
 	private Sesso sesso;
-	private Partecipazione listaPartecipazioni;
 
 	public enum Sesso {
 		Maschio, Femmina
 	}
 
+	@OneToMany(mappedBy = "persona")
+	private Set<Partecipazione> listaPartecipazioni;
+
 	public Persona(String nome, String cognome, String email,
-			LocalDate dataNascita, Sesso sesso,
-			Partecipazione listaPartecipazioni) {
+			LocalDate dataNascita, Sesso sesso) {
 		this.nome = nome;
 		this.cognome = cognome;
 		this.email = email;
 		this.dataNascita = dataNascita;
 		this.sesso = sesso;
-		this.listaPartecipazioni = listaPartecipazioni;
 	}
 
 	@Override

@@ -8,6 +8,8 @@ import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
@@ -38,10 +40,12 @@ public class Evento {
 
 	// Più eventi possono avere più partecipazioni
 	@ManyToMany(cascade = CascadeType.ALL)
-	private Set<Partecipazione> setPartecipazioni;
+	@JoinTable(name = "evento_partecipazione", joinColumns = @JoinColumn(name = "evento_id"), inverseJoinColumns = @JoinColumn(name = "partecipazione_id"))
+	private Set<Partecipazione> listaPartecipazioni;
 
 	// Un evento puo avvenire in una sola location
 	@ManyToOne
+	@JoinColumn(name = "location_id")
 	private Location location;
 
 	public Evento(String titolo, LocalDate dataEvento, String descrizione,

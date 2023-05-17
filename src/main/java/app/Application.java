@@ -5,44 +5,38 @@ import java.time.LocalDate;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import dao.EventoDAO;
+import dao.LocationDAO;
+import dao.PersonaDAO;
 import entities.Evento;
 import entities.Evento.TipoEvento;
+import entities.Location;
+import entities.Persona;
+import entities.Persona.Sesso;
 import utils.JpaUtil;
 
 public class Application {
 
-	private static Logger logger = LoggerFactory.getLogger(Application.class);
 	private static EntityManagerFactory emf = JpaUtil.getEntityManagerFactory();
 
 	public static void main(String[] args) {
 		EntityManager em = emf.createEntityManager();
 
+		PersonaDAO pd = new PersonaDAO(em);
 		EventoDAO ed = new EventoDAO(em);
+		LocationDAO ld = new LocationDAO(em);
+
+		Persona mario = new Persona("Mario", "Rossi", "Mario.rossi@gmail.com",
+				LocalDate.parse("1985-02-04"), Sesso.Maschio);
 
 		Evento evento1 = new Evento("Lezione EPICODE", LocalDate.now(),
 				"Lezione di JAVA JPA", TipoEvento.PRIVATO);
 
-		// save
-//		ed.save(evento1);
+		Location location1 = new Location("Epicode", "Roma");
 
-		System.out.println();
-
-		// getById
-		ed.getById("d59f8c27-8ff5-4324-92d6-20a44c448305");
-
-		System.out.println();
-
-		// delete
-//		ed.delete("2ee51ab8-1b3e-4fde-9008-3fda686590f7");
-
-		System.out.println();
-
-		// refresh
-		ed.refresh("d59f8c27-8ff5-4324-92d6-20a44c448305");
+		pd.save(mario);
+		ed.save(evento1);
+		ld.save(location1);
 
 		em.close();
 		emf.close();
