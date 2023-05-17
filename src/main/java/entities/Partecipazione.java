@@ -1,9 +1,11 @@
 package entities;
 
+import java.util.Set;
 import java.util.UUID;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -23,6 +25,9 @@ public class Partecipazione {
 	public enum Stato {
 		CONFERMATA, DA_CONFERMARE
 	}
+
+	@ManyToMany(mappedBy = "setPartecipazioni")
+	private Set<Evento> eventi;
 
 	public Partecipazione(Persona persona, Evento evento, Stato stato) {
 

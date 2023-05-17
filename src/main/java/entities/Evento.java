@@ -1,11 +1,14 @@
 package entities;
 
 import java.time.LocalDate;
+import java.util.Set;
 import java.util.UUID;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import lombok.Getter;
@@ -31,6 +34,14 @@ public class Evento {
 	public enum TipoEvento {
 		PUBBLICO, PRIVATO
 	}
+
+	// Più eventi possono avere più partecipazioni
+	@ManyToMany
+	private Set<Partecipazione> setPartecipazioni;
+
+	// Un evento puo avvenire in una sola location
+	@ManyToOne
+	private Location location;
 
 	public Evento(String titolo, LocalDate dataEvento, String descrizione,
 			TipoEvento tipoEvento) {

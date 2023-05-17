@@ -31,7 +31,6 @@ public class Persona {
 	public Persona(String nome, String cognome, String email,
 			LocalDate dataNascita, Sesso sesso,
 			Partecipazione listaPartecipazioni) {
-		super();
 		this.nome = nome;
 		this.cognome = cognome;
 		this.email = email;
