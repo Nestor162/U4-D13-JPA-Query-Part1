@@ -4,6 +4,7 @@ import java.time.LocalDate;
 import java.util.Set;
 import java.util.UUID;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -36,7 +37,7 @@ public class Evento {
 	}
 
 	// Più eventi possono avere più partecipazioni
-	@ManyToMany
+	@ManyToMany(cascade = CascadeType.ALL)
 	private Set<Partecipazione> setPartecipazioni;
 
 	// Un evento puo avvenire in una sola location
