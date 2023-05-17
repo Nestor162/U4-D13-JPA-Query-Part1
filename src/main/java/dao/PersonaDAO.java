@@ -6,6 +6,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
 
 import entities.Evento;
+import entities.Persona;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
@@ -16,7 +17,7 @@ public class PersonaDAO {
 		this.em = em;
 	}
 
-	public void save(Evento e) {
+	public void save(Persona e) {
 		EntityTransaction transaction = em.getTransaction();
 		transaction.begin();
 		em.persist(e);
