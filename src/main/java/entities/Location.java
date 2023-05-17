@@ -26,6 +26,7 @@ public class Location {
 	private String nome;
 	private String citta;
 
+	// Una location può ospitare più eventi
 	@OneToMany(mappedBy = "location")
 	@OrderBy("dataEvento")
 	private Set<Evento> listaEventi;

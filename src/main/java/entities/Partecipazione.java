@@ -1,14 +1,11 @@
 package entities;
 
-import java.util.Set;
 import java.util.UUID;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 
 import lombok.Getter;
@@ -36,10 +33,6 @@ public class Partecipazione {
 	@ManyToOne
 	@JoinColumn(name = "persona_id")
 	private Persona persona;
-
-	@ManyToMany
-	@JoinTable(name = "partecipazione_evento", joinColumns = @JoinColumn(name = "partecipazione_id"), inverseJoinColumns = @JoinColumn(name = "evento_id"))
-	private Set<Evento> eventi;
 
 	public Partecipazione(Persona persona, Evento evento, Stato stato) {
 
