@@ -44,6 +44,7 @@ public class Application {
 		persd.save(mario);
 		ed.save(evento1);
 		ld.save(location1);
+		evento1.setLocation(location1);
 		partd.save(partecipazione1);
 
 		em.close();
